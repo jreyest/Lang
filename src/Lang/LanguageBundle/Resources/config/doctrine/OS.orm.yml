@@ -1,0 +1,34 @@
+Lang\LanguageBundle\Entity\OS:
+    type: entity
+    table: null
+    repositoryClass: Lang\LanguageBundle\Entity\OSRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        osName:
+            type: string
+            length: 255
+            column: os_name
+        osSeo:
+            type: string
+            length: '300'
+            column: os_seo  
+    manyToMany:
+        herramientas:
+            targetEntity: Herramienta
+            inversedBy: oss
+            JoinTable:
+                name: herramienta_os
+            joinColumns:
+                JoinColumn:
+                    name: os_id
+                    referencedColumnName: id
+            inverseJoinColumns:
+                JoinColumn:
+                    name: herramienta_id  
+                    referencedColumnName: id
+    lifecycleCallbacks: {  }

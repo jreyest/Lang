@@ -1,0 +1,108 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Herramienta</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Freeorpaid</th>
+                <td>{{ entity.freeOrPaid }}</td>
+            </tr>
+            <tr>
+                <th>Fechacrea</th>
+                <td>{{ entity.fechaCrea|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fechaact</th>
+                <td>{{ entity.fechaAct|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>{{ entity.version }}</td>
+            </tr>
+            <tr>
+                <th>Titdest</th>
+                <td>{{ entity.titDest }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ entity.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Descriplarga</th>
+                <td>{{ entity.descripLarga }}</td>
+            </tr>
+            <tr>
+                <th>Keywordses</th>
+                <td>{{ entity.keywordsEs }}</td>
+            </tr>
+            <tr>
+                <th>Web2orsoft</th>
+                <td>{{ entity.web2OrSoft }}</td>
+            </tr>
+            <tr>
+                <th>Tamano</th>
+                <td>{{ entity.tamano }}</td>
+            </tr>
+            <tr>
+                <th>Getit</th>
+                <td>{{ entity.getIt }}</td>
+            </tr>
+            <tr>
+                <th>Urlauthor</th>
+                <td>{{ entity.urlAuthor }}</td>
+            </tr>
+            <tr>
+                <th>Reqmines</th>
+                <td>{{ entity.reqMinEs }}</td>
+            </tr>
+            <tr>
+                <th>Seourl</th>
+                <td>{{ entity.seoUrl }}</td>
+            </tr>
+            <tr>
+                <th>Paises</th>
+                <td>{{ entity.paises }}</td>
+            </tr>
+            <tr>
+                <th>Edraiting</th>
+                <td>{{ entity.edRaiting }}</td>
+            </tr>
+            <tr>
+                <th>Foto1</th>
+                <td>{{ entity.foto1 }}</td>
+            </tr>
+            <tr>
+                <th>Foto2</th>
+                <td>{{ entity.foto2 }}</td>
+            </tr>
+            <tr>
+                <th>Foto3</th>
+                <td>{{ entity.foto3 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('herramienta') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('herramienta_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

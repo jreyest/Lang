@@ -1,0 +1,103 @@
+Lang\LanguageBundle\Entity\Herramienta:
+    type: entity
+    table: null
+    repositoryClass: Lang\LanguageBundle\Entity\HerramientaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        freeOrPaid:
+            type: integer
+            column: free_or_paid
+        fechaCrea:
+            type: datetime
+            column: fecha_crea
+        fechaAct:
+            type: datetime
+            column: fecha_act
+            nullable: TRUE
+        nombre:
+            type: string
+            length: 255
+        version:
+            type: string
+            length: '50'
+        titDest:
+            type: string
+            length: '50'
+            column: tit_dest
+        descripcion:
+            type: text
+        descripLarga:
+            type: text
+            column: descrip_larga
+        keywordsEs:
+            type: string
+            length: '400'
+            column: keywords_es
+        web2OrSoft:
+            type: integer
+            column: web2_or_soft
+        tamano:
+            type: integer
+            nullable: TRUE
+        getIt:
+            type: string
+            length: '350'
+            column: get_it
+            nullable: TRUE            
+        urlAuthor:
+            type: string
+            length: '350'
+            column: url_author
+            nullable: TRUE
+        reqMinEs:
+            type: string
+            length: '300'
+            column: req_min_es
+            nullable: TRUE
+        seoUrl:
+            type: string
+            length: '50'
+            column: seo_url
+        paises:
+            type: string
+            length: '10000'
+            nullable: TRUE
+        edRaiting:
+            type: integer
+            column: ed_raiting
+            nullable: TRUE
+        foto1:
+            type: string
+            length: '1000'
+            nullable: TRUE
+        foto2:
+            type: string
+            length: '1000'
+            nullable: TRUE
+        foto3:
+            type: string
+            length: '1000'
+            nullable: TRUE
+    manyToOne:
+        Herratipo:
+            targetEntity: Herratipo
+            inversedBy: herramientas
+            joinColumn:
+                name: herratipo_id
+                referencedColumnName: id   
+    manyToMany:
+        oss:
+            targetEntity: OS
+            mappedBy: herramientas
+            cascade: [ remove, persist ]
+    lifecycleCallbacks:
+          prePersist: [ setFechaCreaValue, preUpload ]
+          preUpdate: [ preUpload ]
+          postPersist: [ upload ]
+          postUpdate: [ upload ]
+          postRemove: [ removeUpload ]

@@ -1,0 +1,49 @@
+{% extends 'LangLanguageBundle::layout.html.twig' %}
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+ 
+{% block stylesheets %}
+{% endblock %}
+ 
+{% block content %}
+    <h1>{% trans %}Generar Sistemas Operativos{% endtrans %}</h1>
+    <form action="{{ path('lang_language_anadir_os') }}" method="post" {{ form_enctype(form) }}>
+        <table id="os_form">
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Guardar" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <th>{{ form_label(form.osName) }}</th>
+                    <td>
+                        {{ form_errors(form.osName) }}
+                        {{ form_widget(form.osName) }}
+                    </td>
+                </tr>                
+                <tr>
+                    <th>{{ form_label(form.osSeo) }}</th>
+                    <td>
+                        {{ form_errors(form.osSeo) }}
+                        {{ form_widget(form.osSeo) }}
+                    </td>
+                </tr>               
+            </tbody>
+        </table>
+            {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

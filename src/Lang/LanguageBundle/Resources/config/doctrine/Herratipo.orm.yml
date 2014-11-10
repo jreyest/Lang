@@ -1,0 +1,23 @@
+Lang\LanguageBundle\Entity\Herratipo:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        tipoNom:
+            type: string
+            length: '300'
+            column: tipo_nom            
+        tipoSeo:
+            type: string
+            length: '300'
+            column: tipo_seo    
+    oneToMany:
+        herramientas:
+            targetEntity: Herramienta
+            mappedBy: Herratipo            
+    lifecycleCallbacks: {  }

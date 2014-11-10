@@ -1,0 +1,9 @@
+services:
+    lang.language.admin.herramienta:
+        class: Lang\LanguageBundle\Admin\HerramientaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: language, label: Herramientas }
+        arguments:
+            - ~
+            - Lang\LanguageBundle\Entity\Herramienta
+            - 'LangLanguageBundle:HerramientaAdmin'

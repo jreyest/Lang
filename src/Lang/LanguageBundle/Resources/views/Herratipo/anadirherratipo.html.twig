@@ -1,0 +1,49 @@
+{% extends 'LangLanguageBundle::layout.html.twig' %}
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+ 
+{% block stylesheets %}
+{% endblock %}
+ 
+{% block content %}
+    <h1>{% trans %}Creacion de tipos de herramientas{% endtrans %}</h1>
+    <form action="{{ path('lang_language_anadir_herratipo') }}" method="post" {{ form_enctype(form) }}>
+        <table id="herra_form">
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Guardar" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <th>{{ form_label(form.tipoNom) }}</th>
+                    <td>
+                        {{ form_errors(form.tipoNom) }}
+                        {{ form_widget(form.tipoNom, { 'attr':{'class': 'separacion-inputs'}}) }}
+                    </td>
+                </tr>                
+                <tr>
+                    <th>{{ form_label(form.tipoSeo) }}</th>
+                    <td>
+                        {{ form_errors(form.tipoSeo) }}
+                        {{ form_widget(form.tipoSeo, { 'attr':{'class': 'separacion-inputs'}}) }}
+                    </td>
+                </tr>               
+            </tbody>
+        </table>
+            {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

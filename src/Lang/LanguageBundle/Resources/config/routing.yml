@@ -1,0 +1,27 @@
+lang_language_prueba:
+    path:     /herramienta/prueba
+    defaults: { _controller: LangLanguageBundle:Herramienta:prueba }
+lang_language_anadir_herramienta:
+    path:     1dm3n/herramienta/anadirherra/
+    defaults: { _controller: LangLanguageBundle:Herramienta:create }
+lang_language_anadir_herratipo:
+    path:     1dm3n/herratipo/anadirherratipo
+    defaults: { _controller: LangLanguageBundle:Herratipo:anadirherratipo }
+lang_language_anadir_os:
+    path:     1dm3n/os/anadiros
+    defaults: { _controller: LangLanguageBundle:OS:anadiros }     
+herramienta_show:
+    path:     1dm3n/herramienta/show/{id}
+    defaults: { _controller: LangLanguageBundle:Herramienta:show }
+herramienta_delete:
+    path:     1dm3n/herramienta/delete/{id}
+    defaults: { _controller: LangLanguageBundle:Herramienta:delete }
+herramienta_edit:
+    path:     1dm3n/herramienta/edit/{id}
+    defaults: { _controller: LangLanguageBundle:Herramienta:edit }  
+herramienta:
+    path:     1dm3n/herramienta
+    defaults: { _controller: LangLanguageBundle:Herramienta:index }  
+lang_language_homepage:
+    path:     /
+    defaults: { _controller: LangLanguageBundle:Default:index }

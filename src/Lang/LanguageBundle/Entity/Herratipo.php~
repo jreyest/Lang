@@ -1,0 +1,86 @@
+<?php
+
+namespace Lang\LanguageBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Herratipo
+ */
+class Herratipo
+{
+    /**
+     * @var integer
+     */
+    private $id;
+    /**
+     * @var string
+     */
+    private $tipoNom;
+     /**
+     * @var string
+     */
+    private $tipoSeo;
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $herramientas;
+    
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Set tipoNom
+     *
+     * @param string $tipoNom
+     * @return Herratipo
+     */
+    public function setTipoNom($tipoNom)
+    {
+        $this->tipoNom = $tipoNom;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoNom
+     *
+     * @return string 
+     */
+    public function getTipoNom()
+    {
+        return $this->tipoNom;
+    }
+
+    /**
+     * Set tipoSeo
+     *
+     * @param string $tipoSeo
+     * @return Herratipo
+     */
+    public function setTipoSeo($tipoSeo)
+    {
+        $this->tipoSeo = $tipoSeo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoSeo
+     *
+     * @return string 
+     */
+    public function getTipoSeo()
+    {
+        return $this->tipoSeo;
+    }
+}

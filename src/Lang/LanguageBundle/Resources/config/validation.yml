@@ -1,0 +1,16 @@
+Lang\LanguageBundle\Entity\Herramienta:
+    properties:
+        freeOrPaid:
+            - Choice: { callback: getfreeOrPaidValues }  
+        nombre:
+            - NotBlank: ~
+        web2OrSoft:
+            - Choice: { callback: getweb2OrSoftValues }  
+        getIt:
+            - Url: ~ 
+        urlAuthor:
+            - Url: ~ 
+        seoUrl:
+            - NotBlank: ~
+        foto1:
+            - Image: ~
