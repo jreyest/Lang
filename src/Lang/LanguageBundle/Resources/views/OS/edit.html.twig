@@ -1,0 +1,59 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+{% form_theme edit_form _self %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+    th {vertical-align: top;}
+    td {padding-bottom:15px;}
+</style>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
+{% block content %}
+<h1>{% trans %}Edición de herramienta{% endtrans %}</h1>
+<br>
+{# Para apuntar a la misma página {{ app.request.server.get('PHP_SELF') }} #}
+    <form action="{{ path('os_update', {'id': id}) }}" method="post" {{ form_enctype(edit_form) }}>
+        <table id="herra_form">
+            <tbody>
+                <tr>   
+                    <th>{{ form_label(edit_form.osName) }}</th>
+                    <td>
+                        {{ form_widget(edit_form.osName) }}
+                        {{ form_errors(edit_form.osName) }}
+                    </td>
+                </tr>              
+                <tr>
+                    <th>{{ form_label(edit_form.osSeo) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.osSeo) }}
+                        {{ form_widget(edit_form.osSeo) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    {{ form_end(edit_form) }}
+        <br><ul class="record_actions">
+    <li>
+        <a href="{{ path('os') }}">
+            Volver a lista de sistemas operativos
+        </a>
+    </li>
+{#    <li>{{ form(delete_form) }}</li> #}
+</ul>
+{% endblock %}
+

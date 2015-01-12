@@ -1,74 +1,33 @@
-{% extends '::base.html.twig' %}
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
 
-{% block body -%}
-    <h1>Herramienta list</h1>
+{% block content %}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Freeorpaid</th>
-                <th>Fechacrea</th>
-                <th>Fechaact</th>
-                <th>Nombre</th>
-                <th>Version</th>
-                <th>Titdest</th>
-                <th>Descripcion</th>
-                <th>Descriplarga</th>
-                <th>Keywordses</th>
-                <th>Web2orsoft</th>
-                <th>Tamano</th>
-                <th>Getit</th>
-                <th>Urlauthor</th>
-                <th>Reqmines</th>
-                <th>Seourl</th>
-                <th>Paises</th>
-                <th>Edraiting</th>
-                <th>Foto1</th>
-                <th>Foto2</th>
-                <th>Foto3</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('herramienta_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.freeOrPaid }}</td>
-                <td>{% if entity.fechaCrea %}{{ entity.fechaCrea|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaAct %}{{ entity.fechaAct|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.nombre }}</td>
-                <td>{{ entity.version }}</td>
-                <td>{{ entity.titDest }}</td>
-                <td>{{ entity.descripcion }}</td>
-                <td>{{ entity.descripLarga }}</td>
-                <td>{{ entity.keywordsEs }}</td>
-                <td>{{ entity.web2OrSoft }}</td>
-                <td>{{ entity.tamano }}</td>
-                <td>{{ entity.getIt }}</td>
-                <td>{{ entity.urlAuthor }}</td>
-                <td>{{ entity.reqMinEs }}</td>
-                <td>{{ entity.seoUrl }}</td>
-                <td>{{ entity.paises }}</td>
-                <td>{{ entity.edRaiting }}</td>
-                <td>{{ entity.foto1 }}</td>
-                <td>{{ entity.foto2 }}</td>
-                <td>{{ entity.foto3 }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('herramienta_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('herramienta_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
+<div align="center"></div> 
+<div id="appsbox-general"> 
+    <h1>Herramientas</h1>
+    {% for entity in entities %}
+    <div class="item_app">
+        <h4><a href="{{ entity.urlAuthor }}">{{ entity.nombre }} {{ entity.version }}</a></h4>
+                <p>
+                    <a href="{{ path('herramienta_show', { 'id': entity.id }) }}">show</a> |
+                    <a href="{{ path('herramienta_edit', { 'id': entity.id }) }}">edit</a>
+                </p>        
+                <p>{{ entity.descripcion }}</p> 
+                <div class="item_app_abajo">
+                    <a href="{{ entity.getIt }}" class="get_app">Descargar</a>
+                    <div class="free_or_paid">
+                        <p>
+                        {% if entity.freeOrPaid==1 %}Gratis
+                        {% elseif entity.freeOrPaid==2 %}Gratis/Pagado
+                        {% else %}Pagado
+                        {% endif %}
+                        </p>
+                    </div>
+                </div>
+    </div>
+    {% endfor %}
+ </div>
         <ul>
         <li>
             <a href="{{ path('lang_language_anadir_herramienta') }}">
@@ -76,4 +35,5 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+        {% endblock %}  
+

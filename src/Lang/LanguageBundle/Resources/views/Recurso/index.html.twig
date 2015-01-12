@@ -1,0 +1,39 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+
+{% block content %}
+
+
+<div align="center"></div> 
+<div id="appsbox-general"> 
+    <h1>Recursos</h1>
+    {% for entity in entities %}
+    <div class="item_app">
+        <h4><a href="{{ entity.urlAuthor }}">{{ entity.nombre }} {{ entity.version }}</a></h4>
+                <p>
+                    <a href="{{ path('herramienta_show', { 'id': entity.id }) }}">show</a> |
+                    <a href="{{ path('herramienta_edit', { 'id': entity.id }) }}">edit</a>
+                </p>        
+                <p>{{ entity.descripcion }}</p> 
+                <div class="item_app_abajo">
+                    <a href="{{ entity.getIt }}" class="get_app">Descargar</a>
+                    <div class="free_or_paid">
+                        <p>
+                        {% if entity.freeOrPaid==1 %}Gratis
+                        {% elseif entity.freeOrPaid==2 %}Gratis/Pagado
+                        {% else %}Pagado
+                        {% endif %}
+                        </p>
+                    </div>
+                </div>
+    </div>
+    {% endfor %}
+ </div>
+        <ul>
+        <li>
+            <a href="{{ path('recurso_anadir') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+        {% endblock %}  
+

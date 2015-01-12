@@ -1,0 +1,202 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+ 
+{% block stylesheets %}
+{{ parent() }}
+<style>
+th {vertical-align: top;}
+td {padding-bottom:15px;}
+</style>
+{% endblock %}
+{% block javascripts %}
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="{{ asset('bundles/langlanguage/js/scripts.js')}}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <h1>{% trans %}Creacion de recurso{% endtrans %}</h1>
+    <br>
+    <form action="{{ path('recurso_anadir') }}" method="post" {{ form_enctype(form) }}>
+        <table id="herra_form">
+
+            <tbody>
+                {{ dump(form.idiorecs) }}
+                {% for i in form.idiorecs %}
+                <tr>  
+                    <th>{{ form_label(i) }}</th>
+                    <td>
+                        {{ form_widget(i) }}
+                        {{ form_errors(i) }}
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>   
+                    <th>{{ form_label(form.web2OrSoft) }}</th>
+                    <td>                        
+                        {{ form_widget(form.web2OrSoft, { 'attr':{'class': 'separacion-inputs'}, value : '1'}) }}
+                        {{ form_errors(form.web2OrSoft) }}
+                    </td>
+                </tr>              
+                <tr>
+                    <th>{{ form_label(form.freeOrPaid) }}</th>
+                    <td>
+                        {{ form_errors(form.freeOrPaid) }}
+                        {{ form_widget(form.freeOrPaid, { 'attr':{'class': 'separacion-inputs'}}) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.nombre) }}</th>
+                    <td>
+                        {{ form_widget(form.nombre, { 'attr':{'class': 'separacion-inputs', 'onkeyup': "limitChars(this, 70, 'charlimitinfo0')"}}) }}                        
+                        <br><span id="charlimitinfo0" style=" float:left; color:#aa3333; font-size:12px; font-family:verdana" >Te quedan 70 caracteres.</span><br>
+                        {{ form_errors(form.nombre) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.version) }}</th>
+                    <td>
+                        {{ form_widget(form.version) }}
+                        {{ form_errors(form.version) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.titDest) }}</th>
+                    <td>
+                        {{ form_widget(form.titDest, { 'attr':{'onkeyup': "limitChars(this, 41, 'charlimitinfo3')"}}) }}
+                        <br><span id="charlimitinfo3" style=" float:left; color:#aa3333; font-size:12px; font-family:verdana" >Te quedan 41 caracteres.</span><br> 
+                        {{ form_errors(form.titDest) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.descripcion) }}</th>
+                    <td>
+                        {{ form_widget(form.descripcion, { 'attr':{'onkeyup': "limitChars(this, 350, 'charlimitinfo1')"}}) }}
+                        {{ form_errors(form.descripcion) }}
+                            <br><span id="charlimitinfo1" style=" float:left; color:#aa3333; font-size:12px; font-family:verdana" >Te quedan 350 caracteres.</span><br> 
+                            
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.descripLarga) }}</th>
+                    <td>
+                        {{ form_widget(form.descripLarga) }}
+                        {{ form_errors(form.descripLarga) }}
+                    </td>
+                </tr> 
+                <tr>
+                    <th>{{ form_label(form.keywordsEs) }}</th>
+                    <td>
+                        {{ form_widget(form.keywordsEs) }}
+                        {{ form_errors(form.keywordsEs) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.tamano) }}</th>
+                    <td>
+                        {{ form_widget(form.tamano, { 'attr':{'onkeyup': 'Thousand(this,this.value.charAt(this.value.length-1));'}}) }}
+                        {{ form_errors(form.tamano) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.getIt) }}</th>
+                    <td>
+                        {{ form_widget(form.getIt) }} 
+                        {{ form_errors(form.getIt) }}         
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.urlAuthor) }}</th>
+                    <td>
+                        {{ form_widget(form.urlAuthor) }}
+                        {{ form_errors(form.urlAuthor) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.reqMinEs) }}</th>
+                    <td>
+                        {{ form_widget(form.reqMinEs) }}
+                        {{ form_errors(form.reqMinEs) }}
+                    </td>
+                </tr> 
+                <tr>
+                    <th>{{ form_label(form.seoUrl) }}</th>
+                    <td>
+                        {{ form_widget(form.seoUrl) }}
+                        {{ form_errors(form.seoUrl) }}
+                    </td>
+                </tr>   
+                <tr>
+                    <th>{{ form_label(form.oss) }}</th>
+                    <td>
+                        {{ form_widget(form.oss) }}
+                        {{ form_errors(form.oss) }}
+                    </td>
+                </tr> 
+                <tr>
+                    <th>{{ form_label(form.paises) }}</th>
+                    <td>
+                        {{ form_widget(form.paises) }}
+                        {{ form_errors(form.paises) }}
+                    </td>
+                </tr>  
+                <tr>
+                    <th>{{ form_label(form.image1) }}</th>
+                    <td>
+                        {{ form_widget(form.image1) }}
+                        {{ form_errors(form.image1) }}
+                    </td>
+                </tr> 
+                <tr>
+                    <th>{{ form_label(form.image2) }}</th>
+                    <td>
+                        {{ form_widget(form.image2) }}
+                        {{ form_errors(form.image2) }}
+                    </td>
+                </tr> 
+                <tr>
+                    <th>{{ form_label(form.image3) }}</th>
+                    <td>
+                        {{ form_widget(form.image3) }}
+                        {{ form_errors(form.image3) }}
+                    </td>
+                </tr> 
+                <tr>
+                    <th>{{ form_label(form.edRaiting) }}</th>
+                    <td>
+                        {{ form_widget(form.edRaiting) }}
+                        {{ form_errors(form.edRaiting) }}
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+            {% block javasrcipt2 %}
+            <script>
+  $("#lang_languagebundle_recurso_web2OrSoft").change(function () {
+    if ($('#lang_languagebundle_recurso_web2OrSoft').val() == '1') {
+        $('#lang_languagebundle_recurso_tamano').attr('disabled', 'disabled').val('');
+        $('#lang_languagebundle_recurso_getIt').attr('disabled', 'disabled').val('');
+        $('#lang_languagebundle_recurso_oss').attr('disabled', 'disabled');
+    } else {
+        $('#lang_languagebundle_recurso_tamano').removeAttr('disabled');
+        $('#lang_languagebundle_recurso_getIt').removeAttr('disabled');
+        $('#lang_languagebundle_recurso_oss').removeAttr('disabled');
+    }
+}).trigger('change');
+  </script>
+  {% endblock %} 
+            {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

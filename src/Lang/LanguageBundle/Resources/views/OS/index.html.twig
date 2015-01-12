@@ -1,0 +1,27 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+ 
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %} 
+{% block content %}
+    <h1>{% trans %}Sistemas Operativos{% endtrans %}</h1>
+    <ul>
+    {% for entity in entities %}
+        <li>{{ entity.osName }} <a href="{{ path('os_edit', { 'id': entity.id }) }}">edit</a> | <a href="{{ path('os_delete', { 'id': entity.id }) }}">delete</a>
+        </li>   
+    {% endfor %}
+    </ul>
+    <br><a href="{{ path('os_anadir') }}">Añadir sistema operativo</a>
+{% endblock %}

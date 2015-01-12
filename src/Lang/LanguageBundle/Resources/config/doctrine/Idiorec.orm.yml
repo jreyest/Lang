@@ -1,0 +1,57 @@
+Lang\LanguageBundle\Entity\Idiorec:
+    type: entity
+    table: null
+    repositoryClass: Lang\LanguageBundle\Entity\IdiorecRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nivEasy:    
+            type: boolean
+            column: niv_easy
+        nivInt:    
+            type: boolean
+            column: niv_int
+        nivHard:    
+            type: boolean
+            column: niv_hard       
+        catGram:    
+            type: boolean
+            column: cat_gram 
+        catComEscr:    
+            type: boolean
+            column: cat_com_escr          
+        catComAud:    
+            type: boolean
+            column: cat_com_aud
+        catPron:    
+            type: boolean
+            column: cat_pron  
+        catExpOra:    
+            type: boolean
+            column: cat_exp_ora  
+    manyToOne:
+        recurso:
+            targetEntity: Recurso
+            inversedBy: idiorecs
+            cascade: [ persist ]
+            joinColumn:
+                name: recurso_id
+                referencedColumnName: id
+                nullable: false
+                onDelete: CASCADE
+        idioma:
+            targetEntity: Idioma
+            inversedBy: idiorecs
+            cascade: [ persist ]
+            joinColumn:
+                name: idioma_id
+                referencedColumnName: id
+                nullable: false
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }
+
+

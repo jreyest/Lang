@@ -61,13 +61,17 @@ class OS
      * @var \Doctrine\Common\Collections\Collection
      */
     private $herramientas;
-
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $recursos;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->herramientas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->recursos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -94,7 +98,7 @@ class OS
     }
 
     /**
-     * Add herramientas
+     * Add herramienta
      *
      * @param \Lang\LanguageBundle\Entity\Herramienta $herramienta
      * @return OS
@@ -102,7 +106,6 @@ class OS
     public function addHerramienta(\Lang\LanguageBundle\Entity\Herramienta $herramienta)
     {
         $this->herramientas[] = $herramienta;
-
         return $this;
     }
 
@@ -124,6 +127,37 @@ class OS
     public function getHerramientas()
     {
         return $this->herramientas;
+    }
+     /**
+     * Add recurso
+     *
+     * @param \Lang\LanguageBundle\Entity\Recurso $recurso
+     * @return OS
+     */
+    public function addRecurso(\Lang\LanguageBundle\Entity\Herramienta $recurso)
+    {
+        $this->recursos[] = $recurso;
+        return $this;
+    }
+
+    /**
+     * Remove recursos
+     *
+     * @param \Lang\LanguageBundle\Entity\Recurso $recursos
+     */
+    public function removeRecurso(\Lang\LanguageBundle\Entity\Recurso $recursos)
+    {
+        $this->recursos->removeElement($recursos);
+    }
+
+    /**
+     * Get recursos
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection 
+     */
+    public function getRecursos()
+    {
+        return $this->recursos;
     }
     public function __toString()
     {

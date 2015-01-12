@@ -31,4 +31,17 @@ Lang\LanguageBundle\Entity\OS:
                 JoinColumn:
                     name: herramienta_id  
                     referencedColumnName: id
+        recursos:
+            targetEntity: Recurso
+            inversedBy: oss
+            JoinTable:
+                name: recurso_os
+            joinColumns:
+                JoinColumn:
+                    name: os_id
+                    referencedColumnName: id
+            inverseJoinColumns:
+                JoinColumn:
+                    name: recurso_id  
+                    referencedColumnName: id
     lifecycleCallbacks: {  }

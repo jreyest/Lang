@@ -18,6 +18,7 @@ class OSType extends AbstractType
         $builder
             ->add('osName', null, array('label' => 'Nombre del Sistema Operativo'))
             ->add('osSeo', null, array('label' => 'Nombre para SEO'))
+            ->add('submit','submit', array('label' => 'Proceder'))                
         ;
     }
     

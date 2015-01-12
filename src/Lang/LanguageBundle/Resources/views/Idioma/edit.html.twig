@@ -1,0 +1,59 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+{% form_theme edit_form _self %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+    th {vertical-align: top;}
+    td {padding-bottom:15px;}
+</style>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
+{% block content %}
+<h1>{% trans %}Edición de idioma{% endtrans %}</h1>
+<br>
+{# Para apuntar a la misma página {{ app.request.server.get('PHP_SELF') }} #}
+    <form action="{{ path('idioma_update', {'id': id}) }}" method="post" {{ form_enctype(edit_form) }}>
+        <table id="herra_form">
+            <tbody>
+                <tr>   
+                    <th>{{ form_label(edit_form.idiomaName) }}</th>
+                    <td>
+                        {{ form_widget(edit_form.idiomaName) }}
+                        {{ form_errors(edit_form.idiomaName) }}
+                    </td>
+                </tr>              
+                <tr>
+                    <th>{{ form_label(edit_form.idiomaSeo) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.idiomaSeo) }}
+                        {{ form_widget(edit_form.idiomaSeo) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    {{ form_end(edit_form) }}
+        <br><ul class="record_actions">
+    <li>
+        <a href="{{ path('idioma') }}">
+            Volver a lista de idiomas
+        </a>
+    </li>
+{#    <li>{{ form(delete_form) }}</li> #}
+</ul>
+{% endblock %}
+

@@ -1,4 +1,4 @@
-{% extends 'LangLanguageBundle::layout.html.twig' %}
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
 {% form_theme form _self %}
  
 {% block form_errors %}
@@ -14,6 +14,7 @@
 {% endblock form_errors %}
  
 {% block stylesheets %}
+{{ parent() }}
 <style>
 th {vertical-align: top;}
 td {padding-bottom:15px;}
@@ -27,16 +28,10 @@ td {padding-bottom:15px;}
 
 {% block content %}
     <h1>{% trans %}Creacion de herramienta{% endtrans %}</h1>
-
+    <br>
     <form action="{{ path('lang_language_anadir_herramienta') }}" method="post" {{ form_enctype(form) }}>
         <table id="herra_form">
-            <tfoot>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="Guardar" />
-                    </td>
-                </tr>
-            </tfoot>
+
             <tbody>
                 <tr>   
                     <th>{{ form_label(form.web2OrSoft) }}</th>
@@ -98,6 +93,13 @@ td {padding-bottom:15px;}
                         {{ form_errors(form.descripLarga) }}
                     </td>
                 </tr>
+                <tr>
+                    <th>{{ form_label(form.idiomas) }}</th>
+                    <td>
+                        {{ form_widget(form.idiomas) }}
+                        {{ form_errors(form.idiomas) }}
+                    </td>
+                </tr> 
                 <tr>
                     <th>{{ form_label(form.keywordsEs) }}</th>
                     <td>
@@ -169,10 +171,10 @@ td {padding-bottom:15px;}
                     </td>
                 </tr> 
                 <tr>
-                    <th>{{ form_label(form.foto3) }}</th>
+                    <th>{{ form_label(form.image3) }}</th>
                     <td>
-                        {{ form_widget(form.foto3) }}
-                        {{ form_errors(form.foto3) }}
+                        {{ form_widget(form.image3) }}
+                        {{ form_errors(form.image3) }}
                     </td>
                 </tr> 
                 <tr>

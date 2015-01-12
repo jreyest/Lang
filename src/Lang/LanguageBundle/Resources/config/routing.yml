@@ -1,15 +1,15 @@
 lang_language_prueba:
     path:     /herramienta/prueba
     defaults: { _controller: LangLanguageBundle:Herramienta:prueba }
+lang_language_homepage:
+    path:     /
+    defaults: { _controller: LangLanguageBundle:Default:index }
 lang_language_anadir_herramienta:
     path:     1dm3n/herramienta/anadirherra/
     defaults: { _controller: LangLanguageBundle:Herramienta:create }
-lang_language_anadir_herratipo:
-    path:     1dm3n/herratipo/anadirherratipo
-    defaults: { _controller: LangLanguageBundle:Herratipo:anadirherratipo }
-lang_language_anadir_os:
-    path:     1dm3n/os/anadiros
-    defaults: { _controller: LangLanguageBundle:OS:anadiros }     
+herramienta:
+    path:     1dm3n/herramienta
+    defaults: { _controller: LangLanguageBundle:Herramienta:index } 
 herramienta_show:
     path:     1dm3n/herramienta/show/{id}
     defaults: { _controller: LangLanguageBundle:Herramienta:show }
@@ -19,9 +19,83 @@ herramienta_delete:
 herramienta_edit:
     path:     1dm3n/herramienta/edit/{id}
     defaults: { _controller: LangLanguageBundle:Herramienta:edit }  
-herramienta:
-    path:     1dm3n/herramienta
-    defaults: { _controller: LangLanguageBundle:Herramienta:index }  
-lang_language_homepage:
-    path:     /
-    defaults: { _controller: LangLanguageBundle:Default:index }
+herramienta_update:
+    path:     1dm3n/herramienta/update/{id}
+    defaults: { _controller: LangLanguageBundle:Herramienta:update }   
+os:
+    path:     1dm3n/os/
+    defaults: { _controller: LangLanguageBundle:OS:index }
+os_anadir:
+    path:     1dm3n/os/anadiros
+    defaults: { _controller: LangLanguageBundle:OS:anadiros }   
+os_edit:
+    path:     1dm3n/os/edit/{id}
+    defaults: { _controller: LangLanguageBundle:OS:edit }
+os_update:
+    path:     1dm3n/os/update/{id}
+    defaults: { _controller: LangLanguageBundle:OS:update }
+os_delete:
+    path:     1dm3n/os/delete/{id}
+    defaults: { _controller: LangLanguageBundle:OS:delete }
+herratipo:
+    path:     1dm3n/herratipo/
+    defaults: { _controller: LangLanguageBundle:Herratipo:index }
+herratipo_anadir:
+    path:     1dm3n/herratipo/anadirherratipo
+    defaults: { _controller: LangLanguageBundle:Herratipo:anadirherratipo }
+herratipo_edit:
+    path:     1dm3n/herratipo/edit/{id}
+    defaults: { _controller: LangLanguageBundle:Herratipo:edit }
+herratipo_update:
+    path:     1dm3n/herratipo/update/{id}
+    defaults: { _controller: LangLanguageBundle:Herratipo:update }
+herratipo_delete:
+    path:     1dm3n/herratipo/delete/{id}
+    defaults: { _controller: LangLanguageBundle:Herratipo:delete }
+idioma:
+    path:     1dm3n/idioma/
+    defaults: { _controller: LangLanguageBundle:Idioma:index }    
+idioma_anadir:
+    path:     1dm3n/idioma/anadiridioma
+    defaults: { _controller: LangLanguageBundle:Idioma:anadiridioma }   
+idioma_edit:
+    path:     1dm3n/idioma/edit/{id}
+    defaults: { _controller: LangLanguageBundle:Idioma:edit }
+idioma_update:
+    path:     1dm3n/idioma/update/{id}
+    defaults: { _controller: LangLanguageBundle:Idioma:update }
+idioma_delete:
+    path:     1dm3n/idioma/delete/{id}
+    defaults: { _controller: LangLanguageBundle:Idioma:delete }
+recurso:
+    path:     1dm3n/recurso/
+    defaults: { _controller: LangLanguageBundle:Recurso:index }
+recurso_anadir:
+    path:     1dm3n/recurso/anadirrecurso
+    defaults: { _controller: LangLanguageBundle:Recurso:anadirrecurso } 
+recurso_edit:
+    path:     1dm3n/recurso/edit/{id}
+    defaults: { _controller: LangLanguageBundle:Recurso:edit }
+recurso_update:
+    path:     1dm3n/recurso/update/{id}
+    defaults: { _controller: LangLanguageBundle:Recurso:update }
+recurso_delete:
+    path:     1dm3n/recurso/delete/{id}
+    defaults: { _controller: LangLanguageBundle:Recurso:delete }
+idiorec:
+    path:     1dm3n/idiorec/
+    defaults: { _controller: LangLanguageBundle:Idiorec:index }
+idiorec_show:
+    path:     1dm3n/idiorec/show/{id}
+idiorec_create:
+    path:     1dm3n/idiorec/create
+    defaults: { _controller: LangLanguageBundle:Idiorec:create }   
+idiorec_edit:
+    path:     1dm3n/idiorec/edit/{id}
+    defaults: { _controller: LangLanguageBundle:Idiorec:edit }
+idiorec_update:
+    path:     1dm3n/idiorec/update/{id}
+    defaults: { _controller: LangLanguageBundle:Idiorec:update }
+idiorec_delete:
+    path:     1dm3n/idiorec/delete/{id}
+    defaults: { _controller: LangLanguageBundle:Idiorec:delete }

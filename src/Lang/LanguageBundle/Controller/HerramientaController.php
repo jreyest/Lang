@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Lang\LanguageBundle\Entity\Herramienta;
 use Lang\LanguageBundle\Form\HerramientaType;
+use Lang\LanguageBundle\Form\HerramientaActType;
+use Symfony\Component\Form\Form;
 
 /**
  * Herramienta controller.
@@ -48,12 +50,13 @@ class HerramientaController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+
+       if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('herramienta_show', array('id' => $entity->getId())));
+        
+             return $this->redirect($this->generateUrl('herramienta_show', array('id' => $entity->getId())));
         }
 
         return $this->render('LangLanguageBundle:Herramienta:anadirHerra.html.twig', array(
@@ -113,18 +116,33 @@ class HerramientaController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Herramienta entity.');
         }
-
+        
+        $VWeb2OrSoft = $entity->getweb2OrSoft();
+        $VFreeorpaid = $entity->getFreeorpaid();
+        $VHerraTipo = $entity->getHerratipo();
+        
+        $g = $entity->getweb2OrSofts();
+        $web2orsoft = $g[$VWeb2OrSoft];
+        
+        $g = $entity->getFreeOrPaids();
+        $freeorpaid = $g[$VFreeorpaid];        
+        //$ruta = $this->get('kernel')->getRootDir();
+        //print $ruta;
+        
         $deleteForm = $this->createDeleteForm($id);
+        
 
         return array(
             'entity'      => $entity,
+            'freeOrPaid'=> $freeorpaid,
+            'web2OrSoft'=> $web2orsoft,
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
      * Displays a form to edit an existing Herramienta entity.
-     *
+     * Accion que se llama al abrirse una URL de edicion de herramienta
      * @Route("/{id}/edit", name="herramienta_edit")
      * @Method("GET")
      * @Template()
@@ -132,21 +150,23 @@ class HerramientaController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('LangLanguageBundle:Herramienta')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Herramienta entity.');
+            
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        $form = $this->createEditForm($entity);
+        return $this->render('LangLanguageBundle:Herramienta:edit.html.twig', array(
+            'entity' => $entity,
+            'id'        => $id,
+            'edit_form'   => $form->createView(),
+        ));
+        //return array(
+        //    'entity'      => $entity,
+        //    'edit_form'   => $form->createView(),
+        //);
     }
 
     /**
@@ -158,12 +178,12 @@ class HerramientaController extends Controller
     */
     private function createEditForm(Herramienta $entity)
     {
-        $form = $this->createForm(new HerramientaType(), $entity, array(
+        $form = $this->createForm(new HerramientaActType(), $entity, array(
             'action' => $this->generateUrl('herramienta_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        
 
         return $form;
     }
@@ -175,37 +195,70 @@ class HerramientaController extends Controller
      * @Template("LangLanguageBundle:Herramienta:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
-    {
+    {   
+        $params = $this->getRequest()->request->all();
+        var_dump($params);
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('LangLanguageBundle:Herramienta')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Herramienta entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
+        $update_form = $this->createEditForm($entity);
+        $update_form->bind($request);
+        $validator = $this->get('validator');
+        $errors = $validator->validate($entity, array('actualizar'));
+        
+        if (count($errors) === 0) 
+            {
             $em->flush();
-
+            $session = $request->getSession();
+            $session->getFlashBag()->add('notice', 'Datos modificados');
             return $this->redirect($this->generateUrl('herramienta_edit', array('id' => $id)));
+            }
+        //if ($update_form->isValid()) {           
+        //    $em->flush();
+        //    $session = $request->getSession();
+        //    $session->getFlashBag()->add('notice', 'Datos modificados');
+        //    return $this->redirect($this->generateUrl('herramienta_edit', array('id' => $id)));
+        //}
+        //else{
+        $prueba = $update_form->getData();
+        var_dump($prueba);
+        //}
+        $formErrors = $this->getFormErrors($update_form);
+        var_dump ($formErrors);
+        //echo "no funca";
+            return $this->render('LangLanguageBundle:Herramienta:update.html.twig', array(
+            'entity' => $entity,
+                'id' => $id,
+            'edit_form'   => $update_form->createView(),
+        ));
+    }
+    public function getFormErrors($form)
+    {
+        $errors = array();
+
+        if ($form instanceof Form) {
+            foreach ($form->getErrors() as $error) {
+                $errors[] = $error->getMessage();
+            }
+
+            foreach ($form->all() as $key => $child) {
+                /** @var $child Form */
+                if ($err = $this->getFormErrors($child)) {
+                    $errors[$key] = $err;
+                }
+            }
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $errors;
     }
     /**
      * Deletes a Herramienta entity.
      *
      * @Route("/{id}", name="herramienta_delete")
      * @Method("DELETE")
-     */
+     */  
     public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
@@ -218,9 +271,18 @@ class HerramientaController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Herramienta entity.');
             }
-
-            $em->remove($entity);
-            $em->flush();
+            //$em->remove($entity);
+            //$em->flush();
+            
+            
+            
+            $conn = $this->getDoctrine()->getManager()->getConnection();
+            $stmt = $conn->prepare("DELETE FROM herramienta WHERE id = :herra_id");
+            $stmt->bindParam('herra_id', $id); 
+            $stmt->execute();
+            $stmt = $conn->prepare("DELETE FROM os_herramienta WHERE herramienta_id = :herra_id");
+            $stmt->bindParam('herra_id', $id); // BEWARE: this array has to have at least one element
+            $stmt->execute();
         }
 
         return $this->redirect($this->generateUrl('herramienta'));

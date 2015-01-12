@@ -1,16 +1,17 @@
 Lang\LanguageBundle\Entity\Herramienta:
     properties:
         freeOrPaid:
-            - Choice: { callback: getfreeOrPaidValues }  
+            - Choice: { callback: getfreeOrPaidValues, groups: [anadir, actualizar] }  
         nombre:
-            - NotBlank: ~
+            - NotBlank: {groups: [anadir, actualizar] }
         web2OrSoft:
-            - Choice: { callback: getweb2OrSoftValues }  
+            - Choice: { callback: getweb2OrSoftValues, groups: [anadir, actualizar] }  
         getIt:
-            - Url: ~ 
+            - Url: {groups: [anadir, actualizar] } 
         urlAuthor:
-            - Url: ~ 
+            - Url: {groups: [anadir, actualizar] }
         seoUrl:
-            - NotBlank: ~
+            - NotBlank: {groups: [anadir, actualizar] }
         foto1:
-            - Image: ~
+            - Image: {groups: [anadir] }
+            - NotNull: {groups: [anadir] }

@@ -1,4 +1,4 @@
-{% extends 'LangLanguageBundle::layout.html.twig' %}
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
 {% form_theme form _self %}
  
 {% block form_errors %}
@@ -14,11 +14,12 @@
 {% endblock form_errors %}
  
 {% block stylesheets %}
+{{ parent() }}
 {% endblock %}
- 
+
 {% block content %}
     <h1>{% trans %}Creacion de tipos de herramientas{% endtrans %}</h1>
-    <form action="{{ path('lang_language_anadir_herratipo') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('herratipo_anadir') }}" method="post" {{ form_enctype(form) }}>
         <table id="herra_form">
             <tfoot>
                 <tr>

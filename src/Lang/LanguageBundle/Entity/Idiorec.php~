@@ -1,0 +1,62 @@
+<?php
+
+namespace Lang\LanguageBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Idiorec
+ */
+class Idiorec
+{
+    /**
+     * @var integer
+     */
+    private $id;
+ 
+    protected $recurso; 
+ 
+    protected $idioma; 
+    /**
+     * @var boolean
+     */    
+    private $nivEasy;   
+    /**
+     * @var boolean
+     */    
+    private $nivInt; 
+    /**
+     * @var boolean
+     */    
+    private $nivHard;   
+    /**
+     * @var boolean
+     */    
+    private $catGram;    
+    /**
+     * @var boolean
+     */    
+    private $catComEscr;    
+    /**
+     * @var boolean
+     */    
+    private $catComAud;    
+    /**
+     * @var boolean
+     */    
+    private $catPron;
+    /**
+     * @var boolean
+     */    
+    private $catExpOra;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

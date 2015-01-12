@@ -1,0 +1,39 @@
+Lang\LanguageBundle\Entity\Idioma:
+    type: entity
+    table: null
+    repositoryClass: Lang\LanguageBundle\Entity\IdiomaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        idiomaName:
+            type: string
+            length: 255
+            column: idioma_name
+        idiomaSeo:
+            type: string
+            length: '300'
+            column: idioma_seo  
+    manyToMany:
+        herramientas:
+            targetEntity: Herramienta
+            inversedBy: idiomas
+            JoinTable:
+                name: herramienta_idioma
+            joinColumns:
+                JoinColumn:
+                    name: idioma_id
+                    referencedColumnName: id
+            inverseJoinColumns:
+                JoinColumn:
+                    name: herramienta_id  
+                    referencedColumnName: id
+    oneToMany:
+        idiorecs:
+            targetEntity: Idiorec
+            mappedBy: idioma
+            cascade: [ all ]
+    lifecycleCallbacks: {  }

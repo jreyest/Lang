@@ -1,0 +1,42 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+ 
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %} 
+{% block content %}
+    <h1>{% trans %}Crear idiomas{% endtrans %}</h1>
+    <form action="{{ path('idioma_anadir') }}" method="post" {{ form_enctype(form) }}>
+        <table id="idioma_form">
+            <tbody>
+                <tr>
+                    <th>{{ form_label(form.idiomaName) }}</th>
+                    <td>
+                        {{ form_errors(form.idiomaName) }}
+                        {{ form_widget(form.idiomaName) }}
+                    </td>
+                </tr>                
+                <tr>
+                    <th>{{ form_label(form.idiomaSeo) }}</th>
+                    <td>
+                        {{ form_errors(form.idiomaSeo) }}
+                        {{ form_widget(form.idiomaSeo) }}
+                    </td>
+                </tr>               
+            </tbody>
+        </table>
+            {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

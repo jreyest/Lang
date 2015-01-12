@@ -31,7 +31,7 @@ class Herramienta
     private $fechaAct;
 
     /**
-     * @var stringnombre
+     * @var string
      */
     private $nombre;
 
@@ -120,13 +120,29 @@ class Herramienta
      */
     public $image1;
      /**
-     * @var image1
+     * @var image2
      */
     public $image2;
+     /**
+     * @var image3
+     */
+    public $image3;
      /**
      * @var \Lang\LanguageBundle\Entity\Herratipo
      */
     private $herratipo;
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $oss;
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $idiomas;    
+    /**
+     * @var \Lang\LanguageBundle\Entity\Herratipo
+     */
+    private $Herratipo;
     /**
      * Get id
      *
@@ -186,7 +202,13 @@ class Herramienta
             $this->fechaCrea = new \DateTime();
         }
     }
-
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->fechaAct = new \DateTime();
+    }
     /**
      * Get fechaCrea
      *
@@ -630,15 +652,25 @@ class Herramienta
         // documents should be saved
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
-    public function getWebPath()
-    {
-        return null === $this->foto1 ? null : $this->getUploadDir().'/'.$this->foto1;
-    }
+   //  getWebPath es para mostrar imagenes en la zona de administración
+   //  public function getWebPath()
+   // {
+   //     return null === $this->foto1 ? null : $this->getUploadDir().'/'.$this->foto1;
+   // }
     public function getAbsolutePath()
     {
         return null === $this->foto1 ? null : $this->getUploadRootDir().'/'.$this->foto1;
     }
-
+    public function getAbsolutePath2()
+    {
+        return null === $this->foto2 ? null : $this->getUploadRootDir().'/'.$this->foto2;
+    }
+    public function getAbsolutePath3()
+    {
+        return null === $this->foto3 ? null : $this->getUploadRootDir().'/'.$this->foto3;
+    }
+    
+    
     /**
      * @ORM\PrePersist
      */
@@ -650,6 +682,9 @@ class Herramienta
         if (null !== $this->image2) {
              $this->foto2 = $this->seoUrl.'-2.'.$this->image2->guessExtension();
          }
+        if (null !== $this->image3) {
+             $this->foto3 = $this->seoUrl.'-3.'.$this->image3->guessExtension();
+         }
     }
 
     /**
@@ -657,7 +692,7 @@ class Herramienta
      */
     public function upload()
     {
-        if (null === $this->image1 || null === $this->image2 ) {
+        if (null === $this->image1 || null === $this->image2 || null === $this->image3 ) {
             return;
         }
  
@@ -672,6 +707,10 @@ class Herramienta
         $this->image2->move($this->getUploadRootDir(), $this->foto2);
          unset($this->image2); 
         }
+        if (null !== $this->image3){
+        $this->image3->move($this->getUploadRootDir(), $this->foto3);
+         unset($this->image3); 
+        }        
     }
 
     /**
@@ -679,17 +718,24 @@ class Herramienta
      */
     public function removeUpload()
     {
-        if(image1_exists($image1)) {
-            if ($image1 = $this->getAbsolutePath()) {
+        if(file_exists($image1)) {
+            if ($image1  === $this->getAbsolutePath()) {
                 unlink($image1);
             }
-        }    
+        } 
+        if(file_exists($image2)) {
+            if ($image2  === $this->getAbsolutePath2()) {
+                unlink($image2);
+            }
+        }  
+        if(file_exists($image3)) {
+            if ($image3 === $this->getAbsolutePath3()) {
+                unlink($image3);
+            }
+        }  
     }
   
-    /**
-     * @var \Lang\LanguageBundle\Entity\Herratipo
-     */
-    private $Herratipo;
+
 
 
     /**
@@ -714,10 +760,6 @@ class Herramienta
     {
         return $this->Herratipo;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $oss;
 
     /**
      * Constructor
@@ -725,12 +767,13 @@ class Herramienta
     public function __construct()
     {
         $this->oss = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idiomas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add oss
+     * Add os
      *
-     * @param \Lang\LanguageBundle\Entity\OS $oss
+     * @param \Lang\LanguageBundle\Entity\OS $os
      * @return Herramienta
      */
     public function addOs(\Lang\LanguageBundle\Entity\OS $os)
@@ -740,12 +783,13 @@ class Herramienta
     }
 
     /**
-     * Remove oss
+     * Remove os
      *
-     * @param \Lang\LanguageBundle\Entity\OS $oss
+     * @param \Lang\LanguageBundle\Entity\OS $os
      */
-    public function removeOss(\Lang\LanguageBundle\Entity\OS $oss)
+    public function removeOs(\Lang\LanguageBundle\Entity\OS $oss)
     {
+        
         $this->oss->removeElement($oss);
     }
 
@@ -758,29 +802,36 @@ class Herramienta
     {
         return $this->oss;
     }
-        /**
-     * Set Herratipo
+    /**
+     * Add idioma
      *
-     * @param \Lang\LanguageBundle\Entity\OS $oss
+     * @param \Lang\LanguageBundle\Entity\Idioma $idioma
      * @return Herramienta
      */
-    public function setOss(\Lang\LanguageBundle\Entity\OS $oss = null)
+    public function addIdioma(\Lang\LanguageBundle\Entity\Idioma $idioma)
     {
-        $this->Oss = $oss;
-
-        return $this;
+        $idioma->addHerramienta($this);
+        $this->idiomas[] = $idioma;
     }
 
     /**
-     * Add oss
+     * Remove idioma
      *
-     * @param \Lang\LanguageBundle\Entity\OS $oss
-     * @return Herramienta
+     * @param \Lang\LanguageBundle\Entity\Idioma $idioma
      */
-    public function addOss(\Lang\LanguageBundle\Entity\OS $oss)
+    public function removeIdioma(\Lang\LanguageBundle\Entity\Idioma $idiomas)
     {
-        $this->oss[] = $oss;
-
-        return $this;
+        
+        $this->idiomas->removeElement($idiomas);
     }
-}
+
+    /**
+     * Get idiomas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdiomas()
+    {
+        return $this->idiomas;
+    }
+    }

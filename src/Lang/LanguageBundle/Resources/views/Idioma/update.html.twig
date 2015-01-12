@@ -1,0 +1,9 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+
+
+{% block content %}
+    <h1>Fallo en actualización de idioma</h1>
+
+    <p>Hubo alg&uacute;n problema al actualizar. <a href="{{ path('idioma_edit', { 'id': entity.id }) }}">Por favor intentarlo nuevamente.</a></p>
+    
+{% endblock %}

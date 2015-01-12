@@ -1,0 +1,27 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+ 
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %} 
+{% block content %}
+    <h1>{% trans %}Tipos de herramientas{% endtrans %}</h1>
+    <ul>
+    {% for entity in entities %}
+        <li>{{ entity.tipoNom }} <a href="{{ path('herratipo_edit', { 'id': entity.id }) }}">edit</a> | <a href="{{ path('herratipo_delete', { 'id': entity.id }) }}">delete</a>
+        </li>   
+    {% endfor %}
+    </ul>
+    <br><a href="{{ path('herratipo_anadir') }}">Añadir Tipo de herramienta operativo</a>
+{% endblock %}

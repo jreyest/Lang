@@ -18,6 +18,7 @@ class HerratipoType extends AbstractType
         $builder
             ->add('tipoNom', null, array('label' => 'Nombre'))
             ->add('tipoSeo', null, array('label' => 'Nombre para SEO'))
+            ->add('submit','submit', array('label' => 'Proceder'))  
         ;
     }
     

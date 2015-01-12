@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}
+            {% trans %}Languui{% endtrans %}
+        {% endblock %}
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block stylesheets %}   
+        <link rel="stylesheet" href="{{ asset('bundles/langlanguage/css/general-control.css') }}" type="text/css" media="all" />        
+    {% endblock %}
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
+    <div id="menu">
+        <div id="infologin"><p>Hola. jose | <a href="logout.php">Logout</a><p/></div>
+        <ul>
+            <li><a href="{{ path('recurso') }}">Recursos</a> | </li>
+            <li><a href="{{ path('herramienta') }}">Herramientas</a> | </li>
+            <li><a href="{{ path('os') }}">Sistema Operativo</a> | </li>
+            <li><a href="{{ path('idioma') }}">Idiomas</a> | </li>
+            <li><a href="{{ path('herratipo') }}">Tipo de herramientas</a> | </li>
+        </ul>
+        <div style="width:100%;height:1px;border-top:1px solid #fff;margin:8px 0 8px 0;"></div>
+        <ul>
+            <li><a href="{{ path('recurso_anadir') }}">A&ntilde;adir recursos</a> | </li>
+            <li><a href="{{ path('lang_language_anadir_herramienta') }}">A&ntilde;adir herramientas</a> | </li>
+            <li><a href="destacados.php?">A&ntilde;adir destacado</a> | </li>
+        </ul>
+    </div>
+    <div id="central">
+        <div id="tablacentral">        
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash_notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="flash_error">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        
+        {% block content %}
+        {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

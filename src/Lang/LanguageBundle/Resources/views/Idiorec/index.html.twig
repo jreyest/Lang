@@ -1,0 +1,27 @@
+{% extends 'LangLanguageBundle::layoutAdmin.html.twig' %}
+
+{% block content %}
+
+
+<div align="center"></div> 
+<div id="appsbox-general"> 
+    <h1>Idiomas por recurso</h1>
+    {% for entity in entities %}
+    <div class="item_app">
+        <h4>{{ entity.idioma }} - {{ entity.recurso }}</h4>
+                <p>
+                    <a href="{{ path('herramienta_show', { 'id': entity.id }) }}">show</a> |
+                    <a href="{{ path('herramienta_edit', { 'id': entity.id }) }}">edit</a>
+                </p>        
+    </div>
+    {% endfor %}
+ </div>
+        <ul>
+        <li>
+            <a href="{{ path('idiorec_create') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+        {% endblock %}  
+

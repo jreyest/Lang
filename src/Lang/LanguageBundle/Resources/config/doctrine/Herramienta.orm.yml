@@ -95,9 +95,13 @@ Lang\LanguageBundle\Entity\Herramienta:
             targetEntity: OS
             mappedBy: herramientas
             cascade: [ remove, persist ]
+        idiomas:
+            targetEntity: Idioma
+            mappedBy: herramientas
+            cascade: [ remove, persist ]
     lifecycleCallbacks:
           prePersist: [ setFechaCreaValue, preUpload ]
-          preUpdate: [ preUpload ]
+          preUpdate: [ preUpload, setUpdatedAtValue ]
           postPersist: [ upload ]
           postUpdate: [ upload ]
           postRemove: [ removeUpload ]
